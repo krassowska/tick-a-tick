@@ -1,0 +1,15 @@
+TODO:
+
+- map
+- statistics
+- heatmap
+- add tick
+- subscription (https://mailchimp.com/pricing/)
+- knowledge
+- about
+- tests to Python
+- add photos
+- photo gallery
+- contact
+- shere in social media
+- tick icon
