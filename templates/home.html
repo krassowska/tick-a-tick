@@ -7,13 +7,44 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Leaflet CSS-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+    <!-- fullscreen map https://github.com/Leaflet/Leaflet.fullscreen -->
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+
+    <!-- My CSS -->
     <link rel="stylesheet" href="css.css">
 
 
     <title>TickIt!</title>
+    <style>
+      body {
+        background-color: #fbf1e1;
+      }
+      .btn-warning {
+        border: 1px solid #354802;
+      }
+      .map-container {
+        margin-bottom: 2rem;
+        padding: 3.5rem 0 0 0;
+        border-radius: .3rem;
+        max-width: 100%;
+      }
+      .map-0margin {
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+      }
+      #mapid {
+        height: 300px;
+        position: initial;
+        margin: 0;
+      }
+    </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-sm fixed-top navbar-dark bg-dark">
+    <!-- style="background-color: orange;" -->
+    <nav class="navbar navbar-expand-sm fixed-top navbar-light">
       <a class="navbar-brand" href="#">TickIt!</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -25,10 +56,10 @@
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Statistics</a>
+            <a class="nav-link" href="statistics.html">Statistics</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="knowledge.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Knowledge
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -36,54 +67,86 @@
               <a class="dropdown-item" href="#">Tick borne diseases</a>
               <a class="dropdown-item" href="#">What to do after bite?</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Tick gallery</a>
+              <a class="dropdown-item" href="gallery.html">Tick gallery</a>
             </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Contact</a>
+            <a class="nav-link disabled" href="contact.html" tabindex="-1" aria-disabled="true">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Add a tick!</a>
           </li>
         </ul>
       </div>
     </nav>
-    <div class="jumbotron">
-      <div class="container">
-        <h1 class="display-3">Find ticks!</h1>
-        <p>Here will be map with ticks or add your tick.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+    <div class="container map-container">
+      <!-- Example row of columns -->
+      <div class="row map-0margin">
+        <div class="col-lg-12 map-0margin">
+          <div class='map-0margin' id="mapid"></div>
+          <!-- <h1 class="display-3">Find ticks!</h1> -->
+          <!-- <a class="btn btn-primary btn-lg" href="#" role="button">Add your tick!</a> -->
+        </div>
       </div>
     </div>
 
     <div class="container">
       <!-- Example row of columns -->
       <div class="row">
-        <div class="col-md-4">
-          <h2>Statistics</h2>
-          <p>Check our statistics about ticks!</p>
-          <p><a class="btn btn-secondary" href="#" role="button">View statistics »</a></p>
-        </div>
+
         <div class="col-md-4">
           <h2>Learn more about ticks!</h2>
           <p>Do you know where you can cach a tick or what are the firs signs of tick borne disease? If no you need to read this!</p>
-          <p><a class="btn btn-secondary" href="#" role="button">Learn more »</a></p>
+          <p><a class="btn btn-primary" href="knowledge.html" role="button">Learn more »</a></p>
         </div>
         <div class="col-md-4">
           <h2>Do you know how ticks look like?</h2>
           <p>Check our tick gallery!</p>
-          <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+          <p><a class="btn btn-primary" href="gallery.html" role="button">View details »</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Statistics</h2>
+          <p>Check our statistics about ticks!</p>
+          <p><a class="btn btn-primary" href="statistics.html" role="button">View statistics »</a></p>
         </div>
       </div>
       <hr>
     </div>
-
-    <h1>Hello, add your tick!</h1>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Leaflet JavaScript -->
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+    <!-- fullscreen map https://github.com/Leaflet/Leaflet.fullscreen -->
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <script>
+      var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1IjoidGlja2l0IiwiYSI6ImNqdGQ5dHd5ODB4ajI0M3BmcGIzd2ozaHAifQ.kcP--rwUzKohsV_AOxMx7Q'
+      }).addTo(mymap);
+
+      var marker = L.marker([51.5, -0.09]).addTo(mymap);
+
+      marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+
+      var popup = L.popup()
+        .setLatLng([51.5, -0.07])
+        .setContent("I am a standalone popup.")
+        .openOn(mymap);
+
+      mymap.addControl(new L.Control.Fullscreen());
+
+    </script>
   </body>
 </html>
