@@ -5,6 +5,12 @@
     <title>Tick it!</title>
   </head>
   <body>
-
+    <div><a href="{{ url_for('index') }}">HOME PAGE</a></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 chart">{{ chart|capitalize|first }}</div>
+        <div class="col-md-7 description">Here will be description</div>
+      </div>
+    </div>
   </body>
 </html>
