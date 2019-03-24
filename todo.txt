@@ -1,15 +1,30 @@
 TODO:
 
 - map
+    + fullscreen
+    - add new tick
+    - heatmap
+    - add tick
+        + database
+        - form
+        - pin on map
 - statistics
-- heatmap
-- add tick
+    - html with statistics
+    - python file
 - subscription (https://mailchimp.com/pricing/)
 - knowledge
+    - about ticks
+    - TBD
+    - how to remove a tick
 - about
 - tests to Python
 - add photos
 - photo gallery
 - contact
-- shere in social media
+- share in social media
+    - twitter
+    - fb
 - tick icon
+    - colour
+    + black
+    - white

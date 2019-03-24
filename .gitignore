@@ -1,6 +1,7 @@
 credentials.txt
 notes.py
-enter_environments.sh
+notes.txt
+enter_environment.sh
 run.sh
 
 # https://github.com/github/gitignore/blob/master/Python.gitignore
