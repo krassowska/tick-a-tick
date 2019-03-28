@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Karolina Krassowska">
+    <link href="../static/images/tick-black-200.png" rel="icon">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Leaflet CSS-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+    <!-- fullscreen map https://github.com/Leaflet/Leaflet.fullscreen -->
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="static/css/css.css">
+
+
+    <title>TickIt!</title>
+
+    <style>
+      $custom-file-text: (
+        en: "Browse",
+        pl: "Wyszukaj"
+      );
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+
+
+
+
+          <form action="{{ url_for('add_tick') }}" method="POST" class="needs-validation" novalidate >
+            <label class="">Add your tick!</label>
+            <!--
+            <div class="input-group col-md-6">
+              <label for="place">Place</label>
+              <div class="input-group-prepend">
+                <span class="input-group-text">Place</span>
+              </div>
+              <input type="text" class="form-control" id="place" name="location">
+            </div>
+            -->
+
+            <div class="form-group row">
+              <label for="place" class="col-1 col-form-label">Place</label>
+              <div class="col-11">
+                <input class="form-control" type="text" placeholder="Choose location" value="Warsaw" id="place" name="location" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="date" class="col-1 col-form-label">Date</label>
+              <div class="col-11">
+                <input class="form-control" type="date" value="2019-03-19" min="2018-01-01" max="2019-12-31" id="date" name="date" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="age" class="col-2 col-form-label">What's your age?</label>
+              <div class="col-10">
+                <input class="form-control" type="number" min="0" max="110" placeholder="Age" value="" id="age" name="age" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+            </div>
+
+
+            <fieldset class="form-group">
+              <legend>Sex at birth</legend>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="sex" id="sex_male" value="male">
+                  Male
+                </label>
+              </div>
+              <div class="form-check">
+              <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="sex" id="sex_female" value="female">
+                  Female
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <legend>Is this tick real?</legend>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="is_real" id="real_tick" value="real_tick" recquired>
+                  Yes, this is real tick.
+                </label>
+                <div class="invalid-feedback">
+                  You must agree before submitting.
+                </div>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="is_real" id="test_tick" value="test_tick" recquired>
+                  No, this is test tick.
+                </label>
+                <div class="invalid-feedback">
+                  You must agree before submitting.
+                </div>
+              </div>
+            </fieldset>
+            <!--
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="customFile">
+              <label class="custom-file-label" for="customFile">Add tick's photo</label>
+            </div>
+            -->
+
+            <div>
+              <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+          </form>
+
+          {{ response }}
+
+
+            <!--Add tick photo-->
+            <!--
+            <div class="form-group">
+              <label for="AddTickPhoto">Add tick's photo</label>
+              <input type="file" class="form-control-file border" id="AddTickPhoto">
+            </div>
+
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="customFile">
+              <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+
+
+            <!-- bootstrapdocumentation--><!--
+            <label class="custom-file">
+              <input type="file" id="file" class="custom-file-input">
+              <span class="custom-file-control"></span>
+            </label>
+            -->
+            <!--submit button-->
+
+
+        </div>
+      </div>
+    </div>
+
+    <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+      'use strict';
+      window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+          form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+    </script>
+  </body>
+</html>
