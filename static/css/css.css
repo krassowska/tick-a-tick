@@ -1,22 +1,35 @@
 body {
-  background-color: #baf953;
-  background-color: #e3ff96;
+  /*background-color: #baf953;*/
+  /*background-color: #e3ff96;*/
+  background-color: #fff;
   padding-top: 1rem;
 }
 
 .navbar-dark {
-  background-color: #169209;
+  /*background-color: #169209;*/
+  background-color: #0e7404;
 }
 
 .navbar-brand {
   font-family: 'Permanent Marker', cursive;
   color: #fafeeb;
   font-size: 20px;
+  margin-right: 3rem;
+  margin-left: 3rem;
+}
+
+.active {
+  color: white;
+  font-weight: bold;
+}
+
+.nav-link {
+  color: #fcfaec;
 }
 
 .btn-warning {
-  border: 1px solid #354802;
-  border: 1px solid #a7f843;
+  /*border: 1px solid #354802;*/
+  border: 1px solid #f9cf6a;
 }
 .map-container {
   margin-bottom: 2rem;
