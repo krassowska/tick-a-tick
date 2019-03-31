@@ -1,15 +1,124 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <title>Tick it!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Karolina Krassowska">
+    <link href="../static/images/tick-black-200.png" rel="icon">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Leaflet CSS-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+    <!-- fullscreen map https://github.com/Leaflet/Leaflet.fullscreen -->
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="static/css/css.css" type="text/css">
+
+
+    <title>TickIt!</title>
+
+    <style>
+      $custom-file-text: (
+        en: "Browse",
+        pl: "Wyszukaj"
+      );
+    </style>
   </head>
+
   <body>
-    <div><a href="{{ url_for('index') }}">HOME PAGE</a></div>
-    <div class="container">
+
+    <nav class="navbar navbar-expand-sm fixed-top navbar-dark justify-content-between">
+      <a class="navbar-brand" href="{{ url_for('index') }}">
+        <img src="../static/images/tick-white-200.png" width="30" height="30" alt="small black tick">
+         TickIt!
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('tick_statistics') }}">Statistics</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('knowledge') }}">Knowledge<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('about') }}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+          </li>
+        </ul>
+        <a href="{{ url_for('add_tick') }}" class="btn btn-warning my-2 my-sm-0" >Add tick</a>
+      </div>
+    </nav>
+
+    <div class="container contact-container">
       <div class="row">
-        <div></div>
+        <div class="col-md-12">
+          <h5>This site is empty now, but in the future you would be able to find information and answers about:</h5>
+          <ul>
+            <li>What is tick?</li>
+            <li>Where can I catch them?</li>
+            <li>Are they dangerous?</li>
+            <li>How can I remove a tick?</li>
+            <li>I was bitten, what's next?</li>
+            <li>What are tick borne diseases (TBD)?</li>
+          </ul>
+          And many more.
+          <br>
+          <br>
+          <br>
+          <br>
+
+          <h5>If you would like to hear about our articles first subscribe to our newsletter!</h5>
+          <form>
+            <br>
+            <div class="form-group">
+              <!--<label for="exampleInputEmail1">Email address</label>-->
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+              <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+              <small id="emailHelp" class="form-text text-muted">This form does not work yet but we are working on it.</small>
+            </div>
+            <button type="submit" class="btn btn-success">Subscribe</button>
+          </form>
+
+          <!-- <a href="https://www.lymedisease.org/lyme-disease-symptom-checklist"
+          target="_blank"><img alt="Lyme Disease Symptom Checklist"
+          src="https://www.lymedisease.org/images/ldo-sidebar-symptom-checker.jpg"
+          width="320" height="289" /></a>
+          https://www.lymedisease.org/mylymedata/
+          https://www.lymedisease.org/lyme-disease-symptom-checklist-conf/
+          -->
+
+        </div>
       </div>
     </div>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Leaflet JavaScript -->
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+    <!-- fullscreen map https://github.com/Leaflet/Leaflet.fullscreen -->
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <script type="text/javascript" src="../static/js/script.js"></script>
+    <script>
+
+    </script>
   </body>
 </html>
