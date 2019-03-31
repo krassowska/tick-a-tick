@@ -2,6 +2,7 @@ from flask import render_template, request
 from app import app, db
 from models import Tick
 import datetime as dt
+import json
 
 x = 0
 
@@ -9,7 +10,23 @@ x = 0
 def index():
     global x
     x += 1
-    return render_template('home.html', licznik=x)
+    ticks = Tick.query.all()
+
+    print(type(ticks))
+
+    new_ticks = []
+    for tick in ticks:
+        print(type(tick))
+        #tick_to_list = list(Tick.to_dict(tick))
+        new_ticks.append(tick.to_dict())
+
+    ticks = json.dumps(new_ticks)
+
+    print(ticks)
+    #print(str(ticks[1]))
+    #print(type(str(ticks[1])))
+    print(type(ticks[0]))
+    return render_template('home.html', licznik=x, ticks=ticks)
 
 
 @app.route('/add_tick', methods=['GET', 'POST'])
@@ -20,12 +37,14 @@ def add_tick():
         tick_location = cities_locations[tick_city]
         date = dt.datetime.strptime(request.form['date'], '%Y-%m-%d')
         age = request.form['age']
+        is_male = (True if request.form['sex'] == 'male' else False)
+        is_test = (False if request.form['is_test'] == 'real_tick' else True)
         new_tick = Tick(
             longitude=tick_location['longitude'],
             latitude=tick_location['latitude'],
-            sex=True,
+            sex=is_male,
             age=age,
-            is_test=True,
+            is_test=is_test,
             date=date
         )
 

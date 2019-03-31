@@ -29,8 +29,22 @@ class Tick(db.Model):
     @property
     def sex_name(self):
         return 'Female' if self.sex else 'Male'
-    # Female = True, Male = False
+    # Male = True, Female = False
 
     def __repr__(self):
         return '<Tick %r>' % self.id
+
+    def to_dict(self):
+
+
+        tick = {'id': self.id,
+                'longitude': self.longitude,
+                'latitude': self.latitude,
+                'is_test': self.is_test,
+                'date': str(self.date),
+                'sex': self.sex_name,
+                'age': self.age
+                }
+
+        return tick
 
