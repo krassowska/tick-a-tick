@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, redirect, flash, url_for
 from app import app, db
 from models import Tick
 import datetime as dt
@@ -12,20 +12,20 @@ def index():
     x += 1
     ticks = Tick.query.all()
 
-    print(type(ticks))
+    #print(type(ticks))
 
     new_ticks = []
     for tick in ticks:
-        print(type(tick))
+        #print(type(tick))
         #tick_to_list = list(Tick.to_dict(tick))
         new_ticks.append(tick.to_dict())
 
     ticks = json.dumps(new_ticks)
 
-    print(ticks)
+    #print(ticks)
     #print(str(ticks[1]))
     #print(type(str(ticks[1])))
-    print(type(ticks[0]))
+    #print(type(ticks[0]))
     return render_template('home.html', licznik=x, ticks=ticks)
 
 
@@ -47,15 +47,18 @@ def add_tick():
             is_test=is_test,
             date=date
         )
-
+        print(app.response_class)
         db.session.add(new_tick)
         db.session.commit()
 
-        response = f'You added a new tick from { tick_city }, catched on { date }. You are {age} years old.'
-        return render_template('add_tick.html', response=response)
+
+        tick_added = f'You added a new tick from { tick_city }, caught on { date }. You are {age} years old.'
+        flash(tick_added)
+
+        return redirect(url_for('index'), code=302)
     else:
-        response = ''
-        return render_template('add_tick.html', response=response)
+        info = ''
+        return render_template('add_tick.html', info=info)
 
 @app.route('/ticks')
 def ticks():

@@ -31,25 +31,35 @@ body {
   /*border: 1px solid #354802;*/
   border: 1px solid #f9cf6a;
 }
+
 .map-container {
   margin-bottom: 2rem;
   padding: 3.5rem 0 0 0;
   border-radius: .3rem;
   max-width: 100%;
 }
+
 .map-0margin {
   margin: 0;
   padding: 0;
   max-width: 100%;
 }
+
 #mapid {
   height: 300px;
   position: initial;
   margin: 0;
 }
+
 display-3 {
   position: absolute;
   top: 10px;
   right: 10px;
   z-index: 1;
+}
+
+.add-tick-container, .contact-container {
+  margin-bottom: 2rem;
+  padding: 3.5rem 0 0 0;
+  border-radius: .3rem;
 }
