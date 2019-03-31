@@ -1,0 +1,27 @@
+<html>
+    <body>
+        <ul id="ticks">
+        {% for tick in ticks %}
+            <li>
+                {{ tick.id }},
+                {{ tick.date }},
+                {{ tick.longitude }},
+                {{ tick.latitude }},
+                {{ tick.sex }} ({{ tick.sex_name }}),
+                {% if tick.is_test == True %}
+                    Test tick
+                {% else %}
+                    Real tick
+                {% endif %},
+
+                {{ tick.age }}
+                {% if tick.czy_jest_starszy_niz(100) %}
+                    Ten kleszcz lubi starsze osoby
+                {% elif tick.czy_jest_starszy_niz(18) %}
+                    Ten kleszcz zaatakował dorosłego
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    </body>
+</html>
