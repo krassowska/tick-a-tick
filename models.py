@@ -28,8 +28,8 @@ class Tick(db.Model):
 
     @property
     def sex_name(self):
-        return 'Female' if self.sex else 'Male'
-    # Male = True, Female = False
+        return 'female' if self.sex else 'male'
+    # male = True, female = False
 
     def __repr__(self):
         return '<Tick %r>' % self.id

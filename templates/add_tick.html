@@ -65,39 +65,41 @@
     </nav>
 
 
+    <div class="container first-container add-tick">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Add your tick!</h2>
+        </div>
+      </div>
+    </div>
+
 
     <div class="container add-tick-container">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="place" class="radio-label">1. Look for a place where you caught a tick:</label>
+            <div class="">
+              <input class="form-control" type="text" placeholder="Locate a city near the bite place" id="place" name="location" required>
+              <small id="placeHelp" class="form-text text-muted">
+                Try to find place as precisely as you can. It would help to create more accurate statistics. :)
+              </small>
+            </div>
+            <div class="radio-label">
+              2. Click on the map to select location.
+            </div>
+          </div>
+          <div class='' id="mapid"></div>
+        </div>
 
-
-
-
+        <div class="col-md-6">
           <form action="{{ url_for('add_tick') }}" method="POST" class="needs-validation" novalidate >
-            <label class="">Add your tick!</label>
-            <!--
-            <div class="input-group col-md-6">
-              <label for="place">Place</label>
-              <div class="input-group-prepend">
-                <span class="input-group-text">Place</span>
-              </div>
-              <input type="text" class="form-control" id="place" name="location">
-            </div>
-            -->
+            <input type="hidden" name="longitude" id="longitude" required>
+            <input type="hidden" name="latitude" id="latitude" required>
 
             <div class="form-group row">
-              <label for="place" class="col-1 col-form-label">Place</label>
-              <div class="col-11">
-                <input class="form-control" type="text" placeholder="Choose location" value="Warsaw" id="place" name="location" required>
-                <div class="valid-feedback">
-                  Looks good!
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <label for="date" class="col-1 col-form-label">Date</label>
-              <div class="col-11">
+              <label for="date" class="col-4 col-form-label radio-label">3. Date</label>
+              <div class="col-8">
                 <input class="form-control" type="date" value="2019-03-19" min="2018-01-01" max="2019-12-31" id="date" name="date" required>
                 <div class="valid-feedback">
                   Looks good!
@@ -106,8 +108,8 @@
             </div>
 
             <div class="form-group row">
-              <label for="age" class="col-2 col-form-label">What's your age?</label>
-              <div class="col-10">
+              <label for="age" class="col-4 col-form-label radio-label">4. Your age</label>
+              <div class="col-8">
                 <input class="form-control" type="number" min="0" max="110" placeholder="Age" value="" id="age" name="age" required>
                 <div class="valid-feedback">
                   Looks good!
@@ -117,7 +119,7 @@
 
 
             <fieldset class="form-group">
-              <legend>Sex at birth</legend>
+              <legend class="radio-label">5. Sex at birth</legend>
               <div class="form-check">
                 <label class="form-check-label">
                   <input type="radio" class="form-check-input" name="sex" id="sex_male" value="male">
@@ -133,7 +135,7 @@
             </fieldset>
 
             <fieldset class="form-group">
-              <legend>Is this tick real?</legend>
+              <legend class="radio-label">6. Is this tick real?</legend>
               <div class="form-check">
                 <label class="form-check-label">
                   <input type="radio" class="form-check-input" name="is_test" id="real_tick" value="real_tick">
@@ -156,7 +158,6 @@
 
             <div>
               <button type="submit" class="btn btn-success">Submit</button>
-              <!-- <a href="{{ url_for('add_tick') }}" class="btn btn-warning my-2 my-sm-0" >Add tick</a> -->
             </div>
           </form>
 
@@ -201,6 +202,27 @@
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
     <script type="text/javascript" src="../static/js/script.js"></script>
     <script>
+    // LEAFLET
+
+    previous_marker = null
+
+    function onClickCoordinates(e) {
+      console.log(e.latlng)
+      koordynaty = e.latlng
+
+      if (previous_marker != null) {
+        mymap.removeLayer(previous_marker);
+      }
+      document.getElementById("latitude").value = koordynaty['lat']
+      document.getElementById("longitude").value = koordynaty['lng']
+
+      previous_marker = L.marker([koordynaty['lat'], koordynaty['lng']]).addTo(mymap);
+    }
+
+
+    mymap.on('click', onClickCoordinates);
+
+
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     // code from: "https://getbootstrap.com/docs/4.0/components/forms/"
     (function() {

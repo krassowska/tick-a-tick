@@ -32,16 +32,19 @@ def index():
 @app.route('/add_tick', methods=['GET', 'POST'])
 def add_tick():
     if request.method == 'POST':
-        cities_locations = {'Warsaw': {'longitude': 52.22977, 'latitude': 21.01178}}
-        tick_city = request.form['location'] # Warszawa
-        tick_location = cities_locations[tick_city]
+        #cities_locations = {'Warsaw': {'longitude': 52.22977, 'latitude': 21.01178}}
+        #tick_city = request.form['location'] # Warszawa
+        #tick_location = cities_locations[tick_city]
+        longitude = request.form['longitude']
+        latitude = request.form['latitude']
         date = dt.datetime.strptime(request.form['date'], '%Y-%m-%d')
+        print(date)
         age = request.form['age']
         is_male = (True if request.form['sex'] == 'male' else False)
         is_test = (False if request.form['is_test'] == 'real_tick' else True)
         new_tick = Tick(
-            longitude=tick_location['longitude'],
-            latitude=tick_location['latitude'],
+            longitude=longitude,
+            latitude=latitude,
             sex=is_male,
             age=age,
             is_test=is_test,
@@ -52,7 +55,7 @@ def add_tick():
         db.session.commit()
 
 
-        tick_added = f'You added a new tick from { tick_city }, caught on { date }. You are {age} years old.'
+        tick_added = f'You added a new tick caught on { dt.datetime.date(date) }. You are {age} years old.'
         flash(tick_added)
 
         return redirect(url_for('index'), code=302)

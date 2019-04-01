@@ -2,12 +2,12 @@ TODO:
 
 - map
     + fullscreen
-    - add new tick
+    + add new tick
     - heatmap
     - add tick
         + database
         - form
-        - pin on map
+        + pin on map
 - statistics
     - html with statistics
     - python file
@@ -27,4 +27,4 @@ TODO:
 - tick icon
     - colour
     + black
-    - white
+    + white

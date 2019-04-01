@@ -91,7 +91,7 @@
         </div>
         -->
         <div class="col-md-4">
-          <h2>Would you like hear what's new?</h2>
+          <h2>Would you like to hear what's new?</h2>
           <p>Sign up to our newsletter! We will send you our new articles about Ticks and Tick Borne Diseases (TBD)!</p>
           <p><a class="btn btn-success" href="" role="button">Subscribe</a></p>
         </div>
@@ -140,32 +140,7 @@
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
     <script type="text/javascript" src="../static/js/script.js"></script>
     <script>
-      /*
-
-      var ticks = [
-        {
-          'id': 1,
-          'longitude': 51.5,
-          'latitude': -0.09
-        },
-        {
-          'id': 2,
-          'longitude': 51.505,
-          'latitude': -0.095
-        }
-      ]
-      */
-      /*
-      function add_markers(ticks) {
-        for (var i = 0; i < ticks.length; i++ ) {
-          var tick = ticks[i];
-          var marker = L.marker([tick['longitude'], tick['latitude']]).addTo(mymap);
-        }
-      }
-      */
-
       var ticks = {{ ticks | safe }};
-      //var tick = {{ tick }};
       //alert({{ licznik }})
       add_markers(ticks)
     </script>

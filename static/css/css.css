@@ -58,8 +58,18 @@ display-3 {
   z-index: 1;
 }
 
-.add-tick-container, .contact-container {
+.first-container {
   margin-bottom: 2rem;
   padding: 3.5rem 0 0 0;
   border-radius: .3rem;
+}
+
+.add-tick {
+  text-align: center;
+}
+
+.radio-label {
+  margin: 8px 0 2px 0;
+  font-weight: bold;
+  font-size: 16px;
 }
