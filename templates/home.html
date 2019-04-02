@@ -16,12 +16,20 @@
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
     <!-- fullscreen map https://github.com/Leaflet/Leaflet.fullscreen -->
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
-
+    <!-- Search map https://github.com/stefanocudini/leaflet-search -->
+    <link rel="stylesheet" href="../static/thirdparty/leaflet-search/leaflet-search.css" />
     <!-- My CSS -->
     <link rel="stylesheet" href="../static/css/css.css" type="text/css">
 
 
     <title>TickIt!</title>
+
+    <style>
+      .search-input, .leaflet-control-search {
+        max-width:400px;
+      }
+    </style>
+
   </head>
 
   <body>
@@ -56,18 +64,21 @@
       </div>
     </nav>
 
-
     <div class="container container-fluid map-container">
       <div>
         {% with messages = get_flashed_messages() %}
           {% if messages %}
-            <ul class=flashes>
+            <ul class="alert alert-success" role="alert">
             {% for message in messages %}
-              <li>{{ message }}</li>
+              <li style="list-style: none;">{{ message }}</li>
             {% endfor %}
             </ul>
           {% endif %}
-        {% endwith %}</div>
+        {% endwith %}
+        <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
 
       <div class="row map-0margin">
         <div class="col-lg-12 map-0margin">
@@ -138,11 +149,18 @@
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
     <!-- fullscreen map https://github.com/Leaflet/Leaflet.fullscreen -->
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <!-- Search map https://github.com/stefanocudini/leaflet-search -->
+    <script src="../static/thirdparty/leaflet-search/leaflet-search.js"></script>
+    <!-- My JavaScript -->
     <script type="text/javascript" src="../static/js/script.js"></script>
+
     <script>
       var ticks = {{ ticks | safe }};
       //alert({{ licznik }})
       add_markers(ticks)
+
+      $(".alert").alert()
+
     </script>
   </body>
 </html>

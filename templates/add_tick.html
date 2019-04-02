@@ -16,6 +16,8 @@
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
     <!-- fullscreen map https://github.com/Leaflet/Leaflet.fullscreen -->
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+    <!-- Search map https://github.com/stefanocudini/leaflet-search -->
+    <link rel="stylesheet" href="static/thirdparty/leaflet-search/leaflet-search.css" />
 
     <!-- My CSS -->
     <link rel="stylesheet" href="static/css/css.css" type="text/css">
@@ -28,6 +30,11 @@
         en: "Browse",
         pl: "Wyszukaj"
       );
+
+      .search-input, .leaflet-control-search {
+        max-width:400px;
+      }
+
     </style>
   </head>
 
@@ -80,7 +87,11 @@
           <div class="form-group">
             <label for="place" class="radio-label">1. Look for a place where you caught a tick:</label>
             <div class="">
-              <input class="form-control" type="text" placeholder="Locate a city near the bite place" id="place" name="location" required>
+              <!-- <input class="form-control" type="text" placeholder="Locate a city near the bite place" id="place" name="location" required> -->
+              <!--<input class="form-control" type="text" autocomplete="off" placeholder="Locate a city near the bite place" style="display: block;" id="place"> -->
+              <div class="form-control" id="place">
+
+              </div>
               <small id="placeHelp" class="form-text text-muted">
                 Try to find place as precisely as you can. It would help to create more accurate statistics. :)
               </small>
@@ -200,6 +211,9 @@
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
     <!-- fullscreen map https://github.com/Leaflet/Leaflet.fullscreen -->
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <!-- Search map https://github.com/stefanocudini/leaflet-search -->
+    <script src="static/thirdparty/leaflet-search/leaflet-search.js"></script>
+    <!-- My JavaScript -->
     <script type="text/javascript" src="../static/js/script.js"></script>
     <script>
     // LEAFLET
