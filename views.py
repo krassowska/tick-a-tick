@@ -70,8 +70,29 @@ def ticks():
 
 @app.route('/tick_statistics')
 def tick_statistics():
-    x = 'usmiech'
-    return render_template('tick_statistics.html', chart=x)
+    ticks = Tick.query.all()
+
+    new_ticks = []
+    for tick in ticks:
+        new_ticks.append(tick.to_dict())
+
+    ticks = json.dumps(new_ticks)
+
+    ticks_count = Tick.query.count()
+    female_count = Tick.query.filter_by(sex=False).count()
+    male_count = Tick.query.filter_by(sex=True).count()
+    percent_female = female_count * (ticks_count) / 100
+    percent_male = male_count * (ticks_count) / 100
+
+    return render_template(
+        'tick_statistics.html',
+        ticks_count=ticks_count,
+        ticks=ticks,
+        female_count=female_count,
+        male_count=male_count,
+        percent_female=percent_female,
+        percent_male=percent_male
+    )
 
 @app.route('/knowledge')
 def knowledge():

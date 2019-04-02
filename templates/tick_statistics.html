@@ -10,13 +10,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- Leaflet CSS-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
     <!-- font -->
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
-    <!-- fullscreen map https://github.com/Leaflet/Leaflet.fullscreen -->
-    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
-
     <!-- My CSS -->
     <link rel="stylesheet" href="static/css/css.css" type="text/css">
 
@@ -24,10 +19,6 @@
     <title>TickIt!</title>
 
     <style>
-      $custom-file-text: (
-        en: "Browse",
-        pl: "Wyszukaj"
-      );
     </style>
   </head>
 
@@ -67,7 +58,8 @@
     <div class="container first-container">
       <div class="row">
         <div class="col-md-12">
-
+          <div class="chat_title" style="text-align:center; font-size:24px;">Number of male and female bit by ticks</div>
+          <div id="c1" style="text-align:center;"></div>
 
         </div>
       </div>
@@ -78,14 +70,34 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <!-- Leaflet JavaScript -->
-    <!-- Make sure you put this AFTER Leaflet's CSS -->
-    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
-    <!-- fullscreen map https://github.com/Leaflet/Leaflet.fullscreen -->
-    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
-    <script type="text/javascript" src="../static/js/script.js"></script>
+    <!-- Data Visualization https://github.com/antvis/g2 -->
+    <script src="https://cdn.jsdelivr.net/npm/@antv/g2@3.5.2/build/g2.min.js"></script>
+    <!-- <script src="https://gw.alipayobjects.com/os/antv/assets/g2-brush/0.0.2/g2-brush.js"></script>-->
+    <!-- <script type="text/javascript" src="../static/js/script.js"></script> -->
+    <!--<script type="text/javascript" src="tick_statistics.js"></script>-->
     <script>
+      var ticks = {{ ticks | safe }};
+      var ticks_count = {{ ticks_count }}
+      var female_count = {{ female_count}}
+      var male_count = {{ male_count }}
+      var percent_female = {{ percent_female }}
+      var percent_male = {{ percent_male }}
 
+      const data_sex_count = [
+        { sex: 'male', count: female_count },
+        { sex: 'female', count: male_count },
+      ];
+
+      const sex_count = new G2.Chart({
+        container: 'c1',
+        width: 500,
+        height: 500
+      });
+
+      sex_count_title = "Number of male and female bit by ticks"
+      sex_count.source(data_sex_count);
+      sex_count.interval().position('sex*count').color('sex');
+      sex_count.render();
     </script>
   </body>
 </html>

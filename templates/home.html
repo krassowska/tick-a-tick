@@ -18,6 +18,8 @@
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
     <!-- Search map https://github.com/stefanocudini/leaflet-search -->
     <link rel="stylesheet" href="../static/thirdparty/leaflet-search/leaflet-search.css" />
+    <!-- gesture handling https://github.com/elmarquis/Leaflet.GestureHandling/ -->
+    <link rel="stylesheet" href="../static/thirdparty/leaflet-gesture-handling/leaflet-gesture-handling.css" type="text/css">
     <!-- My CSS -->
     <link rel="stylesheet" href="../static/css/css.css" type="text/css">
 
@@ -82,7 +84,10 @@
 
       <div class="row map-0margin">
         <div class="col-lg-12 map-0margin">
-          <div class='map-0margin' id="mapid"><!--<a class="btn btn-primary btn-lg display-3" href="#" role="button">Add your tick!</a>--></div>
+          <div class='map-0margin main-map' id="mapid"><!--<a class="btn btn-primary btn-lg display-3" href="#" role="button">Add your tick!</a>-->
+
+
+          </div>
         </div>
       </div>
     </div>
@@ -109,7 +114,7 @@
         <div class="col-md-4">
           <h2>Statistics</h2>
           <p>Check our statistics about ticks!</p>
-          <p><a class="btn btn-success" href="statistics" role="button">View statistics »</a></p>
+          <p><a class="btn btn-success" href="tick_statistics" role="button">View statistics »</a></p>
         </div>
       </div>
       <hr>
@@ -150,7 +155,9 @@
     <!-- fullscreen map https://github.com/Leaflet/Leaflet.fullscreen -->
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
     <!-- Search map https://github.com/stefanocudini/leaflet-search -->
-    <script src="../static/thirdparty/leaflet-search/leaflet-search.js"></script>
+    <script src="static/thirdparty/leaflet-search/leaflet-search.js"></script>
+    <!-- gesture handling https://github.com/elmarquis/Leaflet.GestureHandling/ -->
+    <script src="static/thirdparty/leaflet-gesture-handling/leaflet-gesture-handling.js"></script>
     <!-- My JavaScript -->
     <script type="text/javascript" src="../static/js/script.js"></script>
 

@@ -1,4 +1,4 @@
-var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+var mymap = L.map('mapid', {gestureHandling: true}).setView([51.505, -0.09], 13);
 // Find user location:
 // https://ipstack.com/
 // https://stackoverflow.com/questions/24906833/get-your-location-through-python
