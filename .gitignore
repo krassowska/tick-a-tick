@@ -1,6 +1,7 @@
 credentials.txt
 notes.py
 notes.txt
+.env
 enter_environment.sh
 run.sh
 .idea/

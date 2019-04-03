@@ -12,20 +12,14 @@ def index():
     x += 1
     ticks = Tick.query.all()
 
-    #print(type(ticks))
-
     new_ticks = []
     for tick in ticks:
-        #print(type(tick))
-        #tick_to_list = list(Tick.to_dict(tick))
         new_ticks.append(tick.to_dict())
 
     ticks = json.dumps(new_ticks)
 
-    #print(ticks)
-    #print(str(ticks[1]))
-    #print(type(str(ticks[1])))
-    #print(type(ticks[0]))
+
+
     return render_template('home.html', licznik=x, ticks=ticks)
 
 

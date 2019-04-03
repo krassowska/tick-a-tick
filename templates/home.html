@@ -119,18 +119,16 @@
       </div>
       <hr>
     </div>
-    <div class="container">
+    <div class="mx-auto px-4" style="text-align:center;">
       <div class="row">
         <div class="col-md-12">
-          Read last tweets about Ticks and Tick Borne Diseases (TBD).
-          <h1>Twitter</h1>
-          <h3>My timeline</h3>
+          <h2>Read last tweets about Ticks and Tick Borne Diseases (TBD) found on Twitter!</h2>
           <form method="get" action="/news">
             <section>
-              <input type="submit" value="Get home timeline" id="get-button" class="button">
+              <input type="submit" value="See tweets" id="get-button" class="btn btn-success" style="margin: 5px 0;">
               {% for tweet in tweets_from_timeline %}
               <ul>
-                <li>{{ tweet.text }}</li>
+                <li style="list-style: none; padding: 5px; border: solid .025px rgba(0,0,0,.1); border-radius: 5px; margin:0; background-colo: rgba(0,0,0,.1);">{{ tweet.text }}</li>
               </ul>
               {% endfor %}
             </section>
