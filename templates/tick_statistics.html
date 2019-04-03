@@ -60,7 +60,15 @@
         <div class="col-md-12">
           <div class="chat_title" style="text-align:center; font-size:24px;">Number of male and female bit by ticks</div>
           <div id="c1" style="text-align:center;"></div>
+        </div>
+      </div>
+    </div>
 
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="chat_title" style="text-align:center; font-size:24px;">Number of male and female bit by ticks</div>
+          <div id="c2" style="text-align:center;"></div>
         </div>
       </div>
     </div>
@@ -83,6 +91,8 @@
       var percent_female = {{ percent_female }}
       var percent_male = {{ percent_male }}
 
+
+      /* FIRST CHART */
       const data_sex_count = [
         { sex: 'male', count: female_count },
         { sex: 'female', count: male_count },
@@ -98,6 +108,24 @@
       sex_count.source(data_sex_count);
       sex_count.interval().position('sex*count').color('sex');
       sex_count.render();
+
+      /* SECOND CHART */
+      const data_sex_count = [
+        { sex: 'male', count: female_count },
+        { sex: 'female', count: male_count },
+      ];
+
+      const sex_count = new G2.Chart({
+        container: 'c1',
+        width: 500,
+        height: 500
+      });
+
+      sex_count_title = "Number of male and female bit by ticks"
+      sex_count.source(data_sex_count);
+      sex_count.interval().position('sex*count').color('sex');
+      sex_count.render();
+
     </script>
   </body>
 </html>

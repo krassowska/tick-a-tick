@@ -84,6 +84,9 @@ def tick_statistics():
     percent_female = female_count * (ticks_count) / 100
     percent_male = male_count * (ticks_count) / 100
 
+    female_median_age = Tick.query.filter_by(sex=False).count()
+    male_median_age = Tick.query.filter_by(sex=True).count()
+
     return render_template(
         'tick_statistics.html',
         ticks_count=ticks_count,
@@ -91,7 +94,9 @@ def tick_statistics():
         female_count=female_count,
         male_count=male_count,
         percent_female=percent_female,
-        percent_male=percent_male
+        percent_male=percent_male,
+        female_median_age=female_median_age,
+        male_median_age=male_median_age
     )
 
 @app.route('/knowledge')
