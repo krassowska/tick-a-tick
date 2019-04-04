@@ -63,7 +63,7 @@
         </div>
       </div>
     </div>
-
+    <!--
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -72,7 +72,7 @@
         </div>
       </div>
     </div>
-
+    -->
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -93,23 +93,6 @@
 
 
       /* FIRST CHART */
-      const data_sex_count = [
-        { sex: 'male', count: female_count },
-        { sex: 'female', count: male_count },
-      ];
-
-      const sex_count = new G2.Chart({
-        container: 'c1',
-        width: 500,
-        height: 500
-      });
-
-      sex_count_title = "Number of male and female bit by ticks"
-      sex_count.source(data_sex_count);
-      sex_count.interval().position('sex*count').color('sex');
-      sex_count.render();
-
-      /* SECOND CHART */
       const data_sex_count = [
         { sex: 'male', count: female_count },
         { sex: 'female', count: male_count },

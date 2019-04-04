@@ -5,6 +5,7 @@ notes.txt
 enter_environment.sh
 run.sh
 .idea/
+ticks.db
 
 # https://github.com/github/gitignore/blob/master/Python.gitignore
 
