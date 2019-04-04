@@ -1,4 +1,4 @@
-from app import app, db
+from app import db
 import datetime as dt
 
 class Tick(db.Model):
@@ -28,8 +28,8 @@ class Tick(db.Model):
 
     @property
     def sex_name(self):
+        """male = True, female = False"""
         return 'female' if self.sex else 'male'
-    # male = True, female = False
 
     def __repr__(self):
         return '<Tick %r>' % self.id

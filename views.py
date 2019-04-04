@@ -4,12 +4,8 @@ from models import Tick
 import datetime as dt
 import json
 
-x = 0
-
 @app.route('/')
 def index():
-    global x
-    x += 1
     ticks = Tick.query.all()
 
     new_ticks = []
@@ -26,13 +22,9 @@ def index():
 @app.route('/add_tick', methods=['GET', 'POST'])
 def add_tick():
     if request.method == 'POST':
-        #cities_locations = {'Warsaw': {'longitude': 52.22977, 'latitude': 21.01178}}
-        #tick_city = request.form['location'] # Warszawa
-        #tick_location = cities_locations[tick_city]
         longitude = request.form['longitude']
         latitude = request.form['latitude']
         date = dt.datetime.strptime(request.form['date'], '%Y-%m-%d')
-        print(date)
         age = request.form['age']
         is_male = (True if request.form['sex'] == 'male' else False)
         is_test = (False if request.form['is_test'] == 'real_tick' else True)
@@ -44,7 +36,6 @@ def add_tick():
             is_test=is_test,
             date=date
         )
-        print(app.response_class)
         db.session.add(new_tick)
         db.session.commit()
 
@@ -75,8 +66,8 @@ def tick_statistics():
     ticks_count = Tick.query.count()
     female_count = Tick.query.filter_by(sex=False).count()
     male_count = Tick.query.filter_by(sex=True).count()
-    percent_female = female_count * (ticks_count) / 100
-    percent_male = male_count * (ticks_count) / 100
+    percent_female = female_count * ticks_count / 100
+    percent_male = male_count * ticks_count / 100
 
     female_median_age = Tick.query.filter_by(sex=False).count()
     male_median_age = Tick.query.filter_by(sex=True).count()

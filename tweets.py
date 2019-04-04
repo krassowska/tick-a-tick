@@ -18,9 +18,8 @@ api = tweepy.API(auth)
 def news():
     #twitter_names =
     #for name in twitter_names:
-    tweets_from_timeline = api.user_timeline(screen_name = 'Lymenews', count = 5)
+    tweets_from_timeline = api.user_timeline(screen_name='Lymenews', count=5)
     return render_template('home.html', tweets_from_timeline=tweets_from_timeline)
-
 
 #@app.route('/tweet', methods=["POST"])
 #def tweet():
