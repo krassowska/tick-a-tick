@@ -16,7 +16,7 @@ def index():
 
 
 
-    return render_template('home.html', licznik=x, ticks=ticks)
+    return render_template('home.html', ticks=ticks)
 
 
 @app.route('/add_tick', methods=['GET', 'POST'])
