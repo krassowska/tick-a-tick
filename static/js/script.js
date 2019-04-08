@@ -35,18 +35,3 @@ mymap.addControl(new L.Control.Search({
   minLength: 2
 }) );
 
-
-/* Search map https://github.com/stefanocudini/leaflet-search */
-mymap.addControl(new L.Control.Search({
-  container: 'place',
-  url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
-  jsonpParam: 'json_callback',
-  propertyName: 'display_name',
-  propertyLoc: ['lat','lon'],
-  marker: L.circleMarker([0,0],{radius:30}),
-  autoType: false,
-  autoCollapse: false,
-  collapsed: false,
-  initial: false,
-  minLength: 2
-}) );

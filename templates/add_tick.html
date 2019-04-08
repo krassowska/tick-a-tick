@@ -235,6 +235,20 @@
 
     mymap.on('click', onClickCoordinates);
 
+    /* Search map https://github.com/stefanocudini/leaflet-search */
+    mymap.addControl(new L.Control.Search({
+      container: 'place',
+      url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
+      jsonpParam: 'json_callback',
+      propertyName: 'display_name',
+      propertyLoc: ['lat','lon'],
+      marker: L.circleMarker([0,0],{radius:30}),
+      autoType: false,
+      autoCollapse: false,
+      collapsed: false,
+      initial: false,
+      minLength: 2
+    }) );
 
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     // code from: "https://getbootstrap.com/docs/4.0/components/forms/"
@@ -255,6 +269,8 @@
         });
       }, false);
     })();
+
+
     </script>
   </body>
 </html>
