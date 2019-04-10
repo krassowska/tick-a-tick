@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, flash, url_for
-from app import app, db
+from app import app, db, recaptcha
 from models import Tick
 import datetime as dt
 import json
@@ -22,12 +22,16 @@ def index():
 @app.route('/add_tick', methods=['GET', 'POST'])
 def add_tick():
     if request.method == 'POST':
+        if not recaptcha.verify():
+            fail_message = 'Are you human? If yes, tick box above.'
+            return render_template('add_tick.html', fail_message=fail_message)
         longitude = request.form['longitude']
         latitude = request.form['latitude']
         date = dt.datetime.strptime(request.form['date'], '%Y-%m-%d')
         age = request.form['age']
         is_male = (True if request.form['sex'] == 'male' else False)
         is_test = (False if request.form['is_test'] == 'real_tick' else True)
+
         new_tick = Tick(
             longitude=longitude,
             latitude=latitude,
@@ -36,6 +40,7 @@ def add_tick():
             is_test=is_test,
             date=date
         )
+
         db.session.add(new_tick)
         db.session.commit()
 

@@ -164,7 +164,9 @@
               <label class="custom-file-label" for="customFile">Add tick's photo</label>
             </div>
             -->
-
+            <div>{{ recaptcha }}</div>
+            <div>{{ fail_message }}</div>
+            <br/>
             <div>
               <button type="submit" class="btn btn-success">Submit</button>
             </div>
@@ -211,64 +213,66 @@
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
     <!-- Search map https://github.com/stefanocudini/leaflet-search -->
     <script src="static/thirdparty/leaflet-search/leaflet-search.js"></script>
+    <!-- google recaptcha -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <!-- My JavaScript -->
     <script type="text/javascript" src="../static/js/script.js"></script>
 
     <script>
-    // LEAFLET
+      // LEAFLET
 
-    previous_marker = null
+      previous_marker = null
 
-    function onClickCoordinates(e) {
-      console.log(e.latlng)
-      koordynaty = e.latlng
+      function onClickCoordinates(e) {
+        console.log(e.latlng)
+        koordynaty = e.latlng
 
-      if (previous_marker != null) {
-        mymap.removeLayer(previous_marker);
+        if (previous_marker != null) {
+          mymap.removeLayer(previous_marker);
+        }
+        document.getElementById("latitude").value = koordynaty['lat']
+        document.getElementById("longitude").value = koordynaty['lng']
+
+        previous_marker = L.marker([koordynaty['lat'], koordynaty['lng']]).addTo(mymap);
       }
-      document.getElementById("latitude").value = koordynaty['lat']
-      document.getElementById("longitude").value = koordynaty['lng']
-
-      previous_marker = L.marker([koordynaty['lat'], koordynaty['lng']]).addTo(mymap);
-    }
 
 
-    mymap.on('click', onClickCoordinates);
+      mymap.on('click', onClickCoordinates);
 
-    /* Search map https://github.com/stefanocudini/leaflet-search */
-    mymap.addControl(new L.Control.Search({
-      container: 'place',
-      url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
-      jsonpParam: 'json_callback',
-      propertyName: 'display_name',
-      propertyLoc: ['lat','lon'],
-      marker: L.circleMarker([0,0],{radius:30}),
-      autoType: false,
-      autoCollapse: false,
-      collapsed: false,
-      initial: false,
-      minLength: 2
-    }) );
+      /* Search map https://github.com/stefanocudini/leaflet-search */
+      mymap.addControl(new L.Control.Search({
+        container: 'place',
+        url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
+        jsonpParam: 'json_callback',
+        propertyName: 'display_name',
+        propertyLoc: ['lat','lon'],
+        marker: L.circleMarker([0,0],{radius:30}),
+        autoType: false,
+        autoCollapse: false,
+        collapsed: false,
+        initial: false,
+        minLength: 2
+      }) );
 
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    // code from: "https://getbootstrap.com/docs/4.0/components/forms/"
-    (function() {
-      'use strict';
-      window.addEventListener('load', function() {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.getElementsByClassName('needs-validation');
-        // Loop over them and prevent submission
-        var validation = Array.prototype.filter.call(forms, function(form) {
-          form.addEventListener('submit', function(event) {
-            if (form.checkValidity() === false) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-          }, false);
-        });
-      }, false);
-    })();
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      // code from: "https://getbootstrap.com/docs/4.0/components/forms/"
+      (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.getElementsByClassName('needs-validation');
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
 
 
     </script>
