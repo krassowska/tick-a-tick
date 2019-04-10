@@ -4,3 +4,4 @@ tweepy==3.7.0
 SQLAlchemy
 flask_sqlalchemy
 psycopg2
+flask_recaptcha
