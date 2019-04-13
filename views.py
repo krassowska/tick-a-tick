@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, flash, url_for
-from app import app, db, recaptcha
+from app import app, db, recaptcha, sg
 from models import Tick
 import datetime as dt
 import json
