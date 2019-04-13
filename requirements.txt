@@ -5,3 +5,4 @@ SQLAlchemy
 flask_sqlalchemy
 psycopg2
 flask_recaptcha
+sendgrid

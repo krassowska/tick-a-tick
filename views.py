@@ -3,6 +3,7 @@ from app import app, db, recaptcha
 from models import Tick
 import datetime as dt
 import json
+from sendgrid.helpers.mail import Mail, Email, Content
 
 @app.route('/')
 def index():
@@ -97,9 +98,48 @@ def knowledge():
 def gallery():
     return render_template('gallery.html')
 
-@app.route('/contact')
+@app.route('/contact', methods=['GET', 'POST'])
 def contact():
-    return render_template('contact.html')
+    #email = request.form['email']
+    #message = request.form['message']
+    #return render_template('contact.html', email=email, message=message)
+
+    if request.method == 'POST':
+        if not recaptcha.verify():
+            fail_message = 'Are you human? If yes, tick box above.'
+            return render_template('contact.html', fail_message=fail_message)
+        email = request.form['email']
+        subject = request.form['subject']
+        message = request.form['message']
+
+        #new_message = message(
+        #    email=email,
+        #    message=message
+        #)
+
+        #db.session.add(new_message)
+        #db.session.commit()
+
+
+        message_sent = f'You sent a message: { message }. We will answer soon.'
+        flash(message_sent)
+
+        from_email = Email(email)
+        subject = subject
+        to_email = Email("tickit.zlapkleszcza@gmail.com")
+        content = Content("text/plain", message)
+        mail = Mail(from_email, subject, to_email, content)
+        response = sg.client.mail.send.post(request_body=mail.get())
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+
+        return redirect(url_for('contact'), code=302)
+    else:
+        info = ''
+        return render_template('contact.html', info=info)
+
+
 
 @app.route('/about')
 def about():
