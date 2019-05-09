@@ -61,6 +61,26 @@
 
 
     <div class="container first-container contact-container">
+      <div>
+        {% with successfully_sent = get_flashed_messages(category_filter=["successfully_sent"]) %}
+          {% if successfully_sent %}
+            <ul class="alert alert-success" role="alert">
+            {% for message in successfully_sent %}
+              <li style="list-style: none;">{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        {% with sending_error = get_flashed_messages(category_filter=["sending_error"]) %}
+          {% if sending_error %}
+            <ul class="alert alert-danger" role="alert">
+            {% for message in sending_error %}
+              <li style="list-style: none;">{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+      </div>
       <div class="row">
         <div class="col-md-6">
           <form action="{{ url_for('contact') }}" method="POST">
@@ -90,7 +110,7 @@
           <h6>Would you like to ask some questions or find out more about this project? We are more than happy to help you! :)</h6>
           <strong>email:</strong> tickit.zlapkleszcza@gmail.com
           <br>
-          <strong>github repository:</strong> <a href="https://github.com/krassowska/TickIt">krassowska/TickIt</a>
+          <strong>GitHub repository:</strong> <a href="https://github.com/krassowska/TickIt">krassowska/TickIt</a>
         </div>
       </div>
     </div>

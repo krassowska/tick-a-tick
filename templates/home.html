@@ -72,7 +72,7 @@
               This website is still under development.<br>
               Please feel free to drop me an e-mail at tickit.zlapkleszcza@gmail.com if you would like to learn more or cooperate on tick and tick-borne disease monitoring research (I am currently looking for a PhD or an internship) - Karolina
           </div>
-        {% with messages = get_flashed_messages() %}
+        {% with messages = get_flashed_messages(category_filter=['message']) %}
           {% if messages %}
             <ul class="alert alert-success" role="alert">
             {% for message in messages %}

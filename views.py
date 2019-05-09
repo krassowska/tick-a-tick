@@ -5,6 +5,7 @@ import datetime as dt
 import json
 from sendgrid.helpers.mail import Mail, Email, Content
 
+
 @app.route('/')
 def index():
     ticks = Tick.query.all()
@@ -14,8 +15,6 @@ def index():
         new_ticks.append(tick.to_dict())
 
     ticks = json.dumps(new_ticks)
-
-
 
     return render_template('home.html', ticks=ticks)
 
@@ -47,17 +46,19 @@ def add_tick():
 
 
         tick_added = f'You added a new tick caught on { dt.datetime.date(date) }. You are {age} years old.'
-        flash(tick_added)
+        flash(tick_added, 'message')
 
         return redirect(url_for('index'), code=302)
     else:
         info = ''
         return render_template('add_tick.html', info=info)
 
+
 @app.route('/ticks')
 def ticks():
     ticks = Tick.query.all()
     return render_template('ticks_table.html', ticks=ticks)
+
 
 @app.route('/tick_statistics')
 def tick_statistics():
@@ -90,20 +91,20 @@ def tick_statistics():
         male_median_age=male_median_age
     )
 
+
 @app.route('/knowledge')
 def knowledge():
     return render_template('knowledge.html')
+
 
 @app.route('/gallery')
 def gallery():
     return render_template('gallery.html')
 
+
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
-    #email = request.form['email']
-    #message = request.form['message']
-    #return render_template('contact.html', email=email, message=message)
-
+    
     if request.method == 'POST':
         if not recaptcha.verify():
             fail_message = 'Are you human? If yes, tick box above.'
@@ -112,28 +113,20 @@ def contact():
         subject = request.form['subject']
         message = request.form['message']
 
-        #new_message = message(
-        #    email=email,
-        #    message=message
-        #)
-
-        #db.session.add(new_message)
-        #db.session.commit()
-
-
-        message_sent = f'You sent a message: { message }. We will answer soon.'
-        flash(message_sent)
-
         from_email = Email(email)
         to_email = "tickit.zlapkleszcza+strona@gmail.com"
         subject = subject
         content = Content("text/plain", message)
         mail = Mail(from_email, to_email, subject, content)
-        print(mail)
-        response = sg.send(mail)
-        print(response.status_code)
-        print(response.body)
-        print(response.headers)
+        
+        try:
+            response = sg.send(mail)
+            message_sent = 'Your message has been sent. We will answer soon.'
+            flash(message_sent, 'successfully_sent')
+
+        except Exception as e:
+            message_not_sent = 'Try to send your message again.'
+            flash(message_not_sent, 'sending_error')
 
         return redirect(url_for('contact'), code=302)
     else:
@@ -141,8 +134,6 @@ def contact():
         return render_template('contact.html', info=info)
 
 
-
 @app.route('/about')
 def about():
     return render_template('about.html')
-
