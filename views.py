@@ -125,7 +125,7 @@ def contact():
         flash(message_sent)
 
         from_email = Email(email)
-        to_email = "tickit.zlapkleszcza@gmail.com"
+        to_email = "tickit.zlapkleszcza+strona@gmail.com"
         subject = subject
         content = Content("text/plain", message)
         mail = Mail(from_email, to_email, subject, content)
