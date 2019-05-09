@@ -13,6 +13,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
 app.config['RECAPTCHA_SITE_KEY'] = os.environ ['RECAPTCHA_SITE_KEY']
+app.config['RECAPTCHA_ENABLED'] = False if os.environ ['RECAPTCHA_ENABLED'] == 'False' else True
 app.config['RECAPTCHA_SECRET_KEY'] = os.environ ['RECAPTCHA_SECRET_KEY']
 recaptcha = ReCaptcha(app=app)
 

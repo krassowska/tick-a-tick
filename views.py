@@ -125,11 +125,12 @@ def contact():
         flash(message_sent)
 
         from_email = Email(email)
+        to_email = "tickit.zlapkleszcza@gmail.com"
         subject = subject
-        to_email = Email("tickit.zlapkleszcza@gmail.com")
         content = Content("text/plain", message)
-        mail = Mail(from_email, subject, to_email, content)
-        response = sg.client.mail.send.post(request_body=mail.get())
+        mail = Mail(from_email, to_email, subject, content)
+        print(mail)
+        response = sg.send(mail)
         print(response.status_code)
         print(response.body)
         print(response.headers)
