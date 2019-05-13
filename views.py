@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, flash, url_for
 from app import app, db, recaptcha, sg
-from models import Tick
+from models import Tick, Subscribent
 import datetime as dt
 import json
 from sendgrid.helpers.mail import Mail, Email, Content
@@ -92,9 +92,23 @@ def tick_statistics():
     )
 
 
-@app.route('/knowledge')
+@app.route('/knowledge', methods=['GET'])
 def knowledge():
     return render_template('knowledge.html')
+
+
+@app.route('/subscribe', methods=['POST'])
+def subscribe():
+    email = request.form['subscribent_email']
+    new_subscribent = Subscribent(email=email)
+
+    db.session.add(new_subscribent)
+    db.session.commit()
+
+    new_subscribent = f'You added your email {email} to our newsletter'
+    flash(new_subscribent, 'subscription')
+
+    return redirect(url_for('knowledge'))
 
 
 @app.route('/gallery')

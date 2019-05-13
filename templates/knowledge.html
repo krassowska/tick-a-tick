@@ -83,11 +83,22 @@
           <br>
 
           <h5>If you would like to hear about our articles first subscribe to our newsletter!</h5>
-          <form>
+          <form action="{{ url_for('subscribe') }}" method="POST">
+              <div>
+                {% with messages = get_flashed_messages(category_filter=['subscription']) %}
+                  {% if messages %}
+                    <ul class="alert alert-success" role="alert">
+                    {% for message in messages %}
+                      <li style="list-style: none;">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+              </div>
             <br>
             <div class="form-group">
-              <!--<label for="exampleInputEmail1">Email address</label>-->
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+              <!--<label for="subscribent_email">Email address</label>-->
+              <input type="subscribent_email" class="form-control" id="subscribent_email" name="subscribent_email" aria-describedby="emailHelp" placeholder="Enter email">
               <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
               <small id="emailHelp" class="form-text text-muted">This form does not work yet but we are working on it.</small>
             </div>
