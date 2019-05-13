@@ -99,6 +99,10 @@ def knowledge():
 
 @app.route('/subscribe', methods=['POST'])
 def subscribe():
+    if not recaptcha.verify():
+        fail_message = 'Are you human? If yes, tick box above.'
+        return render_template('knowledge.html', fail_message=fail_message)
+
     email = request.form['subscribent_email']
     new_subscribent = Subscribent(email=email)
 
