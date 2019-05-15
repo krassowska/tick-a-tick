@@ -8,7 +8,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
   minZoom: 1,
   maxZoom: 18,
   id: 'mapbox.streets',
-  accessToken: 'pk.eyJ1IjoidGlja2l0IiwiYSI6ImNqdGQ5dHd5ODB4ajI0M3BmcGIzd2ozaHAifQ.kcP--rwUzKohsV_AOxMx7Q'
+  accessToken: 'pk.eyJ1IjoidGlja2l0IiwiYSI6ImNqdnBwaDU3YTA2dXI0YWxxMzZydnkzNTMifQ.AkDFSHLvKIZmOX1z0QDCnA'
 }).addTo(mymap);
 
 
