@@ -104,13 +104,16 @@ def subscribe():
         return render_template('knowledge.html', fail_message=fail_message)
 
     email = request.form['subscribent_email']
-    new_subscribent = Subscribent(email=email)
+    
+    new_subscribent_messagge = f'You added your email {email} to our newsletter'
 
-    db.session.add(new_subscribent)
-    db.session.commit()
-
-    new_subscribent = f'You added your email {email} to our newsletter'
-    flash(new_subscribent, 'subscription')
+    if db.session.query(Subscribent.email).filter_by(email=email).first() is None:
+        new_subscribent = Subscribent(email=email)
+        db.session.add(new_subscribent)
+        db.session.commit()
+        flash(new_subscribent_messagge, 'subscription')
+    else:
+        flash(new_subscribent_messagge, 'subscription')
 
     return redirect(url_for('knowledge'))
 
