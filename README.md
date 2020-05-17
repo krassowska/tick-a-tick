@@ -6,3 +6,5 @@ Run app locally:
 source .env
 flask run
 ```
+
+Old website address: http://www.tickatick.org
