@@ -7,4 +7,4 @@ source .env
 flask run
 ```
 
-Old website address: http://www.tickatick.org
+In 2019 website was available on http://www.tickatick.org - no longer available.
