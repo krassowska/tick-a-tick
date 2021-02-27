@@ -44,7 +44,6 @@ def add_tick():
         db.session.add(new_tick)
         db.session.commit()
 
-
         tick_added = f'You added a new tick caught on { dt.datetime.date(date) }. You are {age} years old.'
         flash(tick_added, 'message')
 
@@ -104,7 +103,7 @@ def subscribe():
         return render_template('knowledge.html', fail_message=fail_message)
 
     email = request.form['subscribent_email']
-    
+
     new_subscribent_messagge = f'You added your email {email} to our newsletter'
 
     if db.session.query(Subscribent.email).filter_by(email=email).first() is None:
@@ -125,7 +124,7 @@ def gallery():
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
-    
+
     if request.method == 'POST':
         if not recaptcha.verify():
             fail_message = 'Are you human? If yes, tick box above.'
@@ -139,13 +138,13 @@ def contact():
         subject = subject
         content = Content("text/plain", message)
         mail = Mail(from_email, to_email, subject, content)
-        
+
         try:
-            response = sg.send(mail)
+            sg.send(mail)
             message_sent = 'Your message has been sent. We will answer soon.'
             flash(message_sent, 'successfully_sent')
 
-        except Exception as e:
+        except Exception:
             message_not_sent = 'Try to send your message again.'
             flash(message_not_sent, 'sending_error')
 
