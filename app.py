@@ -5,7 +5,6 @@ import sendgrid
 import os
 
 
-
 app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
 
@@ -19,6 +18,6 @@ recaptcha = ReCaptcha(app=app)
 
 sg = sendgrid.SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
 
-import views
-import models
-import tweets
+import views  # noqa: E402,F401
+import models  # noqa: E402,F401
+import tweets  # noqa: E402,F401
