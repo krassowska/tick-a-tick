@@ -1,6 +1,7 @@
 from app import db
 import datetime as dt
 
+
 class Tick(db.Model):
 
     def __init__(self, **kwargs):
@@ -22,7 +23,6 @@ class Tick(db.Model):
     sex = db.Column(db.Boolean(), nullable=False)
     age = db.Column(db.Integer, nullable=True)
 
-
     def czy_jest_starszy_niz(self, n_lat):
         return self.age > n_lat
 
@@ -35,8 +35,6 @@ class Tick(db.Model):
         return '<Tick %r>' % self.id
 
     def to_dict(self):
-
-
         tick = {'id': self.id,
                 'longitude': self.longitude,
                 'latitude': self.latitude,
@@ -47,6 +45,7 @@ class Tick(db.Model):
                 }
 
         return tick
+
 
 class Subscribent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
